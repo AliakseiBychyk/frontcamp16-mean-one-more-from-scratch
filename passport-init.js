@@ -29,7 +29,10 @@ module.exports = function (passport) {
     passReqToCallback: true // allows us to pass back the entire request to the callback
   },
     function (req, username, password, done) {
-      return done('we have not implement this ', false);
+      findOrCreateUser = function () {
+        return done('we have not implement this ', false);
+      };
+      return findOrCreateUser();
     }
   ));
 
