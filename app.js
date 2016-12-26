@@ -41,6 +41,10 @@ app.use(function(req, res, next) {
   next(err);
 });
 
+// Initialize passport
+var initPassport = require('./passport-init');
+initPassport(passport);
+
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
