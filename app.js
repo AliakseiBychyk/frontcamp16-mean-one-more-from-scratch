@@ -8,8 +8,7 @@ var session = require('express-session');
 var passport = require('passport');
 
 var api = require('./routes/api');
-// we will uncomment this after implementing authenticate
-// var authenticate = require('./routes/authenticate');
+var authenticate = require('./routes/authenticate');
 
 var app = express();
 
