@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
-var Post = mongoose.model('Post');
+var Post = require('../models/models');
 
 // Used for routes that must be authenticated
 function isAuthenticated(req, res, next) { 
@@ -29,9 +29,15 @@ router.route('/posts')
   // create a new post
   .post(function (req, res) {
     
-    var post = new Post();
-    post.text = req.body.text;
-    post.created_by = req.body.created_by;
+    var post = new Post({
+      title: req.body.title,
+      body: req.body.body,
+      permalink: req.body.permalink,
+      author: req.body.author,
+      tags: req.body.tags.split(", "),
+      date: req.body.date
+    });
+
     post.save(function (err, post) {
       if (err) {
         return res.send(500, err);
@@ -58,8 +64,10 @@ router.route('/posts/:id')
       if (err) {
         res.send(err);
       }
-      post.created_by = req.body.created_by;
-      post.text = req.body.text;
+      post.date = req.body.date;
+      post.title = req.body.title;
+      post.body = req.body.body;
+      post.tags = req.body.tags.split(", ");
       post.save(function (err, post) {
         if (err) res.send(err);
         res.json(post);

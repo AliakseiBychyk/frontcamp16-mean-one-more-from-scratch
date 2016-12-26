@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var User = mongoose.model('User');
+var User = require('./models/models');
 var LocalStrategy = require('passport-local').Strategy;
 var bCrypt = require('bcrypt-nodejs');
 
@@ -62,11 +62,12 @@ module.exports = function (passport) {
           return done(null, false);
         } else {
           // if there is no user, create the user
-          var newUser = new User();
-          // set the user's local credentials
-          newUser.username = username;
-          newUser.password = createHash(password);
-          
+          var newUser = new User({
+            username: username,
+            email: email,
+            password: createHash(password)
+          });
+
           // save the user
           newUser.save(function (err) {
             if (err) {

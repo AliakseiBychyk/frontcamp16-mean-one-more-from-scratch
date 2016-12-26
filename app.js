@@ -33,7 +33,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(passport.initialize());
 app.use(passport.session());
 
-// app.use('/auth', authenticate);
+app.use('/', index);
+app.use('/auth', authenticate);
 app.use('/api', api);
 
 // catch 404 and forward to error handler
