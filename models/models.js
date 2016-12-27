@@ -11,7 +11,7 @@ var postSchema = new mongoose.Schema({
   title: { type: String, required: true },
   body: { type: String, required: true },
   permalink: { type: String, required: true, unique: true },
-  author: { type: Schema.ObjectId, ref: 'User', required: true },
+  author: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
   tags: [
     { type: String }
   ],
@@ -23,5 +23,8 @@ var postSchema = new mongoose.Schema({
   created_at: { type: Date, default: Date.now },
 });
 
-mongoose.model('Post', postSchema);
-mongoose.model('User', userSchema);
+var User = mongoose.model('User', userSchema);
+var Post = mongoose.model('Post', postSchema);
+
+module.exports = Post;
+module.exports = User;

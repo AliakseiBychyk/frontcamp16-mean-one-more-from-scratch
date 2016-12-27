@@ -11,6 +11,7 @@ var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/frontcamp');
 
 var api = require('./routes/api');
+var index = require('./routes/index');
 var authenticate = require('./routes/authenticate');
 
 var app = express();
@@ -24,7 +25,9 @@ app.set('view engine', 'jade');
 app.use(logger('dev'));
 // add this portion to your middleware section
 app.use(session({
-  secret: 'very odd secret'
+  secret: 'very odd secret',
+  resave: false,
+  saveUninitialized: false
 }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
